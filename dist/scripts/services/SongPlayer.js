@@ -176,10 +176,22 @@
         */
         SongPlayer.setVolume = function(volume) {
             if(currentBuzzObject) {
+                SongPlayer.volume = volume;
                 currentBuzzObject.setVolume(volume);
             }
         }
         
+        SongPlayer.mute = function() {
+            if (currentBuzzObject) {
+                if (currentBuzzObject.isMuted()) {
+                    currentBuzzObject.unmute();
+                    SongPlayer.currentSong.muted = false;
+                } else if (!currentBuzzObject.isMuted()) {
+                    currentBuzzObject.mute();
+                    SongPlayer.currentSong.muted = true;
+                }
+            }
+        }
         
         return SongPlayer;
     }
